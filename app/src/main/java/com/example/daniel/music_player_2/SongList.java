@@ -41,7 +41,7 @@ public class SongList extends AppCompatActivity {
                 ActivityCompat.requestPermissions(SongList.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST);
             }
         } else {
-            doThings(); //Then grabs the song values from internal storage and displaysis
+            doThings(); //Then grabs the song values from internal storage and displays it
         }
     }
 
@@ -78,14 +78,14 @@ public class SongList extends AppCompatActivity {
                 arrayList.add(currentTitle + "\n" + currentArtist);
             } while (songCursor.moveToNext());
         }
+        songCursor.close();
     }
 
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
-
                     doThings();
                 } else {
                     Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
