@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Handler handler = new Handler() {
+        @Override
         public void handleMessge(Message message) {
             int currentPosition = message.what;
             positionBar.setProgress(currentPosition);
