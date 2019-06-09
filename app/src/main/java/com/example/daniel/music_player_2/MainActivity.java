@@ -1,17 +1,19 @@
 package com.example.daniel.music_player_2;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button playButton;
+    private Button playButton, songListButton;
     private SeekBar positionBar, volBar;
     private TextView elapsedTimeLabel, remainingTimeLabel;
     private MediaPlayer mediaPlayer;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         playButton = findViewById(R.id.play_button);
         elapsedTimeLabel = findViewById(R.id.elapsedTimeLabel);
         remainingTimeLabel = findViewById(R.id.remainingTimeLabel);
+        songListButton = findViewById(R.id.song_list_button);
 
         mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.patiencebeat);
         mediaPlayer.setLooping(true);
@@ -96,10 +99,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        songListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SongList.class));
+            }
+        });
+
     }
 
     private Handler handler = new Handler() {
-        @Override
         public void handleMessge(Message message) {
             int currentPosition = message.what;
             positionBar.setProgress(currentPosition);
